@@ -34,6 +34,7 @@ export class SignInComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: '',
+      role: '',
     }, { validator: comparePassword});
     this.registerForm.patchValue({
       email: 'info@example.com'
@@ -42,8 +43,7 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
       const {value} = this.registerForm;
-      // abc
-      console.log('da ok');
+      console.log(value);
       this.message = 'Tao thanh cong';
       this.signInService.createAcc(value)
         .subscribe(next => {
@@ -55,5 +55,4 @@ export class SignInComponent implements OnInit {
         }, error => console.log(error));
     }
   }
-
 }
