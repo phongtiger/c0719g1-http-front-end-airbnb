@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ISignIn} from '../interface/i-sign-in';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SignInService} from '../service/sign-in.service';
@@ -11,6 +11,7 @@ function comparePassword(c: AbstractControl) {
     passwordnotmatch: true
   };
 }
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -21,10 +22,11 @@ export class SignInComponent implements OnInit {
   roles: IRole[];
   registerForm: FormGroup;
   message: string;
+
   constructor(private signInService: SignInService,
               private roleService: RoleService,
               private fb: FormBuilder) {
-    this.roleService.getRole().subscribe( next => {
+    this.roleService.getRole().subscribe(next => {
       this.roles = next;
     });
   }
@@ -35,16 +37,26 @@ export class SignInComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: '',
       role: '',
-    }, { validator: comparePassword});
+    }, {validator: comparePassword});
     this.registerForm.patchValue({
       email: 'info@example.com'
     });
   }
+
   onSubmit() {
     if (this.registerForm.valid) {
       const {value} = this.registerForm;
+      console.log(value.role);
+      switch (value.role) {
+        case '2':
+          value.role = {id: 2, name: 'user'};
+          break;
+        case '3':
+          value.role = {id: 3, name: 'host'};
+          break;
+      }
       console.log(value);
-      this.message = 'Tao thanh cong';
+      this.message = 'Tạo thành công';
       this.signInService.createAcc(value)
         .subscribe(next => {
           this.accList.unshift(next);
@@ -52,7 +64,7 @@ export class SignInComponent implements OnInit {
             email: '',
             password: '',
           });
-        }, error => console.log(error));
+        }, error => this.message = 'Tạo không thành công. Email đã tồn tại');
     }
   }
 }

@@ -8,10 +8,10 @@ import {IRole} from '../interface/i-role';
   providedIn: 'root'
 })
 export class RoleService {
-  private readonly API_URL = 'http://localhost:8080/';
+  private readonly API_URL = 'http://localhost:8080';
   constructor(private http: HttpClient) { }
-  createAcc(user: Partial<IRole>): Observable<IRole> {
-    return this.http.post<IRole>(`${this.API_URL}/role/{id}`, user);
+  createAcc(role: Partial<IRole>): Observable<IRole> {
+    return this.http.post<IRole>(`${this.API_URL}/role/{id}`, role);
   }
   getRole(): Observable<IRole[]> {
     return this.http.get<IRole[]>(`${this.API_URL}/role`);

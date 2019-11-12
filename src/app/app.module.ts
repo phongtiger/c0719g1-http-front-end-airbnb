@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignInComponent
+    SignInComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
