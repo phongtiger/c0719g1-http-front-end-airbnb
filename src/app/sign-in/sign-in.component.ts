@@ -42,6 +42,7 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
       const {value} = this.registerForm;
+      // abc
       console.log('da ok');
       this.message = 'Tao thanh cong';
       this.signInService.createAcc(value)
