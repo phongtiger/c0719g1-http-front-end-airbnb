@@ -1,1 +1,47 @@
-<p>Cham cham cham</p>
+<body>
+<div class="container">
+  <h2 class="text-center">User registration</h2>
+  <div class="alert alert-success" role="alert" *ngIf="message">
+    <h4 class="alert-heading">{{message}}</h4>
+  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
+    <div class="form-group row">
+      <label class="col">
+        Email
+        <input type="email" class="form-control" formControlName="email">
+      </label>
+      <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+        Invalid email!
+      </div>
+      <input type="hidden" formControlName="password" id="demo">
+    </div>
+      <div class="form-group row">
+        <label class="col">
+          Password
+          <input type="password" class="form-control" formControlName="password">
+        </label>
+      </div>
+      <div class="form-group row">
+        <label class="col">
+          Confirm Password
+          <input type="password" class="form-control" formControlName="confirmPassword" >
+        </label>
+      </div>
+    <div class="alert alert-danger" role="alert"
+         *ngIf="registerForm.hasError('passwordnotmatch') &&
+      registerForm.get('password').touched">
+      Password does not match!
+    </div>
+    <div class="form-group">
+      <button class="btn btn-info" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+</body>
+<script>function myFunction() {
+        document.getElementById("demo").innerHTML = document.getElementById("myInput").value;
+}
+</script>
+<pre>
+{{ registerForm.value | json}}
+</pre>

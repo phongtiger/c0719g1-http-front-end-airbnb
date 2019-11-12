@@ -1,5 +1,7 @@
+import {IRole} from './i-role';
+
 export interface ISignIn {
-  string: email;
-  string: password;
-  string: roll;
+  email: string ;
+  password: string;
+  // roll: IRole;
 }
