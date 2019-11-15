@@ -4,60 +4,65 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-      <div class="alert alert-info" role="alert" *ngIf="message">
-        <h4 class="alert-heading">{{message}}</h4>
+      <div *ngIf="isSignUpFailed; else signupForm">
+        Your registration is successful. Please login!
       </div>
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
-        <div class="form-group row">
-          <label class="col">
-            Email
-            <input type="email" class="form-control" formControlName="email">
-          </label>
-          <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
-            Invalid email!
+      <ng-template #signupForm>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
+          <div class="form-group row">
+            <label class="col">
+              Email
+              <input type="email" class="form-control" formControlName="email">
+            </label>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+              Invalid email!
+            </div>
+            <input type="hidden" formControlName="password" id="demo">
           </div>
-          <input type="hidden" formControlName="password" id="demo">
-        </div>
-        <div class="form-group row">
-          <label class="col">
-            Password
-            <input type="password" class="form-control" formControlName="password">
-          </label>
-          <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
-            Invalid password!
+          <div class="form-group row">
+            <label class="col">
+              Password
+              <input type="password" class="form-control" formControlName="password">
+            </label>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+              Invalid password!
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col">
-            Confirm Password
-            <input type="password" class="form-control" formControlName="confirmPassword" >
-          </label>
-          <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched">
-            Invalid password!
+          <div class="form-group row">
+            <label class="col">
+              Confirm Password
+              <input type="password" class="form-control" formControlName="confirmPassword" >
+            </label>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched">
+              Invalid password!
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col">
-            Chọn mục đích sử dụng:
-            <select formControlName="role" class="form-control">
-              <option [defaultSelected]="2" value="2">User</option>
-              <option value="3">Host</option>
-            </select>
-          </label>
-        </div>
-        <div class="alert alert-danger" role="alert"
-             *ngIf="registerForm.hasError('passwordnotmatch') &&
+          <div class="form-group row">
+            <label class="col">
+              Chọn mục đích sử dụng:
+              <select  formControlName="role" class="form-control">
+                <option [defaultSelected]="3" value="3">Host</option>
+                <option value="2">User</option>
+              </select>
+            </label>
+          </div>
+          <div class="alert alert-danger" role="alert"
+               *ngIf="registerForm.hasError('passwordnotmatch') &&
       registerForm.get('password').touched">
-          Password does not match!
-        </div>
-        <div class="form-group">
-          <button class="btn btn-info" type="submit">Submit</button>
-        </div>
-      </form>
+            Password does not match!
+          </div>
+          <div class="form-group">
+            <button class="btn btn-info" type="submit">Submit</button>
+          </div>
+        </form>
+      </ng-template>
     </div>
+    <div *ngIf="!isSignUpFailed" class="alert alert-warning">
+      Chưa đăng ký thành công
+    </div>
+  </div>
     <div class="col-md-4"></div>
   </div>
-</div>
 </body>
 <pre>
 {{ registerForm.value | json}}

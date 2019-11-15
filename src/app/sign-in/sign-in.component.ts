@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ISignIn} from '../interface/i-sign-in';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SignInService} from '../service/sign-in.service';
-import {IRole} from '../interface/i-role';
-import {RoleService} from '../service/role.service';
 
 function comparePassword(c: AbstractControl) {
   const v = c.value;
@@ -18,19 +16,13 @@ function comparePassword(c: AbstractControl) {
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  accList: ISignIn[];
-  roles: IRole[];
   registerForm: FormGroup;
   message: string;
-
+  isSignedUp = false;
+  isSignUpFailed = false;
   constructor(private signInService: SignInService,
-              private roleService: RoleService,
               private fb: FormBuilder) {
-    this.roleService.getRole().subscribe(next => {
-      this.roles = next;
-    });
   }
-
   ngOnInit() {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -49,22 +41,24 @@ export class SignInComponent implements OnInit {
       console.log(value.role);
       switch (value.role) {
         case '2':
-          value.role = {id: 2, name: 'user'};
+          value.role = ['user'];
           break;
         case '3':
-          value.role = {id: 3, name: 'host'};
+          value.role = ['pm'];
           break;
       }
       console.log(value);
-      this.message = 'Tạo thành công';
       this.signInService.createAcc(value)
         .subscribe(next => {
-          this.accList.unshift(next);
-          this.registerForm.reset({
+         console.log(next);
+         this.isSignUpFailed = false;
+         this.registerForm.reset({
             email: '',
             password: '',
           });
-        }, error => this.message = 'Tạo không thành công. Email đã tồn tại');
+        }, error => {
+          this.message = 'Tạo không thành công';
+          this.isSignUpFailed = true; });
     }
   }
 }

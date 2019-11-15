@@ -1,38 +1,35 @@
-<body>
 <div class="container login">
-  <h2 class="text-center">Login</h2>
-  <div class="alert alert-warning" role="alert" *ngIf="message">
-    <h4 class="alert-heading">{{message}}</h4>
-  </div>
-  <div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
-      <div class="form-group row">
-        <label class="col">
-          Email
-          <input type="email" class="form-control" formControlName="email">
-        </label>
-        <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
-          Invalid email!
+    <h2 class="text-center">Login</h2>
+    <div class="alert alert-warning" role="alert" *ngIf="message">
+      <h4 class="alert-heading">{{message}}</h4>
+    </div>
+    <div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
+        <div class="form-group row">
+          <label class="col">
+            Email
+            <input type="email" class="form-control" formControlName="email">
+          </label>
+          <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
+            Invalid email!
+          </div>
+          <input type="hidden" formControlName="password">
         </div>
-        <input type="hidden" formControlName="password" id="demo">
-      </div>
-      <div class="form-group row">
-        <label class="col">
-          Password
-          <input type="password" class="form-control" formControlName="password">
-        </label>
-        <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
-          Invalid password!
+        <div class="form-group row">
+          <label class="col">
+            Password
+            <input type="password" class="form-control" formControlName="password">
+          </label>
+          <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+            Invalid password!
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-info" type="submit">Submit</button>
-      </div>
-    </form>
+        <div class="form-group">
+          <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
   </div>
-
-</div>
-</body>
 <pre>
 {{ loginForm.value | json}}
 </pre>

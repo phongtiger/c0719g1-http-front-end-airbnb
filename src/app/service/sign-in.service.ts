@@ -11,9 +11,6 @@ export class SignInService {
   private readonly API_URL = 'http://localhost:8080';
   constructor(private http: HttpClient) { }
   createAcc(user: Partial<ISignIn>): Observable<ISignIn> {
-    return this.http.post<ISignIn>(`${this.API_URL}/list`, user);
-  }
-  getAcc(): Observable<ISignIn[]> {
-    return this.http.get<ISignIn[]>(`${this.API_URL}/list`);
+    return this.http.post<ISignIn>(`${this.API_URL}/api/auth/signup`, user);
   }
 }
