@@ -14,10 +14,10 @@ export class PassService {
     return this.http.get<IPass>(`${this.API_URL}/user/${id}`);
   }
 
-  updateAcc(user: Partial<IPass>): Observable<IPass> {
-    const r = confirm('Ban chac chan muon cap nhat?\n Chon OK hoac Cancel!');
-    if (r) {
-      return this.http.put<IPass>(`${this.API_URL}/user/edit/${user.id}`, user);
-    }
-  }
+  // updateAcc(user: Partial<IPass>): Observable<IPass> {
+  //   const r = confirm('Ban chac chan muon cap nhat?\n Chon OK hoac Cancel!');
+  //   if (r) {
+  //     return this.http.put<IPass>(`${this.API_URL}/user/edit/${user.id}`, user);
+  //   }
+  // }
 }

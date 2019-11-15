@@ -3,6 +3,8 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {PassService} from '../service/pass.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IPass} from '../interface/i-pass';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {ProfileService} from '../service/profile.service';
 
 
 function comparePassword(c: AbstractControl) {
@@ -19,34 +21,27 @@ function comparePassword(c: AbstractControl) {
 export class ChangePasswordComponent implements OnInit {
   acc: IPass;
   passForm: FormGroup;
+  token: string;
   message: string;
   constructor(private route: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router,
-              private passService: PassService, ) { }
+              private profileService: ProfileService,
+              private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
     this.passForm = this.fb.group({
-      id: '',
-      pass: ['', [Validators.required, Validators.minLength(6)]],
-      oldPass: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
     })
     ;
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.passService.getOneAcc(id).subscribe(
-      next => {
-        this.acc = next;
-        this.passForm.patchValue(this.acc);
-      },
-      error => {
-        this.acc = null;
-      }
-    );
+    this.token = this.tokenStorage.getToken();
   }
   editMember() {
-    this.passService.updateAcc(this.passForm.value).subscribe(next => {
+    this.profileService.updatePass(this.passForm.value).subscribe(next => {
       this.message = 'Update success';
     });
+  }
+
+  logout() { this.tokenStorage.saveToken(''); this.message = 'Bạn đã đăng xuất';
   }
 }

@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
       avatar: ''
     })
     ;
-    const token = this.tokenStorage.getToken();
+    this.token = this.tokenStorage.getToken();
     this.profileService.getOneAccToken().subscribe(
       next => {
         this.acc = next;

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {SignInComponent} from './sign-in/sign-in.component';
 import {ProfileComponent} from './profile/profile.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'editPassword',
-    component: ProfileComponent
+    component: ChangePasswordComponent
   }
 ];
 @NgModule({
