@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SignInService} from '../service/sign-in.service';
 import {ProfileService} from '../service/profile.service';
 import {IProfile} from '../interface/i-profile';
+import {TokenStorageService} from '../auth/token-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,23 +15,25 @@ import {IProfile} from '../interface/i-profile';
 export class ProfileComponent implements OnInit {
   acc: IProfile;
   data: FormGroup;
+  token: string;
   message: string;
   constructor(private route: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router,
-              private profileService: ProfileService, ) { }
+              private profileService: ProfileService,
+              private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
     this.data = this.fb.group({
-      id: '',
+      token: '',
       name: '',
       phone: '',
       address: '',
       avatar: ''
     })
     ;
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.profileService.getOneAcc(id).subscribe(
+    const token = this.tokenStorage.getToken();
+    this.profileService.getOneAccToken().subscribe(
       next => {
         this.acc = next;
         this.data.patchValue(this.acc);

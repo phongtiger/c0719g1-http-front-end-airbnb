@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ISignIn} from '../interface/i-sign-in';
 import {Observable} from 'rxjs';
+import {ISignIn} from '../interface/i-sign-in';
 
 @Injectable({
   providedIn: 'root'

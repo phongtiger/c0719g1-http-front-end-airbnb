@@ -14,7 +14,11 @@ const routes: Routes = [
     component: SignInComponent
   },
   {
-    path: 'addprofile/:id',
+    path: 'addprofile',
+    component: ProfileComponent
+  },
+  {
+    path: 'editPassword',
     component: ProfileComponent
   }
 ];

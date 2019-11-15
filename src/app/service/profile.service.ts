@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IProfile} from '../interface/i-profile';
+import {JwtResponse} from '../interface/JwResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,13 @@ export class ProfileService {
     return this.http.get<IProfile>(`${this.API_URL}/user/${id}`);
   }
 
-  updateAcc(user: Partial<IProfile>): Observable<IProfile> {
+  updateAcc(user: Partial<IProfile>): Observable<JwtResponse> {
     const r = confirm('Ban chac chan muon cap nhat?\n Chon OK hoac Cancel!');
     if (r) {
-      return this.http.put<IProfile>(`${this.API_URL}/user/edit/${user.id}`, user);
+      return this.http.put<JwtResponse>(`${this.API_URL}/profile/edit`, user);
     }
+  }
+  getOneAccToken(): Observable<IProfile> {
+    return this.http.get<IProfile>(`${this.API_URL}/profile`);
   }
 }
