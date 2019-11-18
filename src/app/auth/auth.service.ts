@@ -18,7 +18,6 @@ class SignUpInfo {
 export class AuthService {
   private readonly API_URL = 'http://localhost:8080';
   private loginUrl = 'http://localhost:8080/api/auth/signin';
-  private signupUrl = 'http://localhost:8080/api/auth/signup';
 
   constructor(private http: HttpClient) {
   }

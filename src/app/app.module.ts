@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {httpInterceptorProviders} from './auth/auth-interceptor';
+import { HeadComponent } from './head/head.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {httpInterceptorProviders} from './auth/auth-interceptor';
     SignInComponent,
     LoginComponent,
     ProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    HeadComponent
   ],
   imports: [
     BrowserModule,
