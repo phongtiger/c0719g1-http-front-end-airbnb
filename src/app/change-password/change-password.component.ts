@@ -42,6 +42,6 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
-  logout() { this.tokenStorage.saveToken(''); this.message = 'Bạn đã đăng xuất';
+  logout() { this.tokenStorage.signOut(); this.message = 'Bạn đã đăng xuất';
   }
 }

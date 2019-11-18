@@ -8,8 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import {httpInterceptorProviders} from './auth/auth-interceptor';
+import {DesktopComponent} from './desktop/desktop.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,7 @@ import {httpInterceptorProviders} from './auth/auth-interceptor';
     SignInComponent,
     LoginComponent,
     ProfileComponent,
-    ChangePasswordComponent
+    DesktopComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,7 @@ import {httpInterceptorProviders} from './auth/auth-interceptor';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

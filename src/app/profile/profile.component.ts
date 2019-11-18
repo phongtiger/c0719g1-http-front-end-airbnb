@@ -48,4 +48,6 @@ export class ProfileComponent implements OnInit {
       this.message = 'Update success';
     });
   }
+  logout() { this.tokenStorage.signOut(); this.message = 'Bạn đã đăng xuất';
+  }
 }
