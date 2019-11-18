@@ -1,42 +1,85 @@
-<div class="container login">
-    <h2 class="text-center">Login</h2>
-    <div class="alert alert-warning" role="alert" *ngIf="message">
-      <h4 class="alert-heading">{{message}}</h4>
-    </div>
-  <a routerLink="/addprofile">Add Profile</a>
-  <div><br/></div>
-  <a routerLink="/editPassword">Change Password</a>
-    <div>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
-        <div class="form-group row">
-          <label class="col">
-            Email
-            <input type="email" class="form-control" formControlName="email">
-          </label>
-          <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
-            Invalid email!
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-login">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-6">
+              <a class="active" href="#" id="login-form-link">Login</a>
+            </div>
           </div>
-          <input type="hidden" formControlName="password">
+          <hr>
         </div>
-        <div class="form-group row">
-          <label class="col">
-            Password
-            <input type="password" class="form-control" formControlName="password">
-          </label>
-          <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
-            Invalid password!
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div *ngIf="message" class="alert alert-warning" role="alert">
+                <h4 class="alert-heading">{{message}}</h4>
+              </div>
+              <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login-form">
+                <div class="form-group">
+                  <label class="col">
+                    Email </label>
+                  <input class="form-control" formControlName="email" type="email">
+                  <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" class="invalid-feedback"
+                       role="alert">
+                    Invalid email!
+                  </div>
+                  <input formControlName="password" id="demo" type="hidden">
+                </div>
+                <div class="form-group">
+                  <label class="col">
+                    Password </label>
+                  <input class="form-control" formControlName="password" type="password">
+                  <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
+                       class="invalid-feedback"
+                       role="alert">
+                    Invalid password!
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                  <input class="" id="remember" name="remember" type="checkbox">
+                  <label for="remember"> Remember Me</label>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                      <input class="form-control btn btn-login" id="login-submit" name="login-submit" type="submit"
+                             value="Log In">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="text-center">
+                        <a class="forgot-password" href="https://mp3.zing.vn/bai-hat/Quen-Khac-Viet/ZWZAI9C8.html">Forgot
+                          Password?</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="text-center">
+
+                        <p class="register"> Nếu chưa có tài khoản vui lòng đăng kí<a href="/signin"> tại đây</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <button class="btn btn-info" type="submit">Submit</button>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-info" (click)="logout()">Logout</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
-<pre>
-{{ loginForm.value | json}}
-</pre>
+</div>
+</body>
+<!--<pre>-->
+<!--{{ loginForm.value | json}}-->
+<!--</pre>-->
 
